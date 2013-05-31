@@ -1,26 +1,61 @@
-# Overview
+# SUIT documentation
+
+**Table of contents**
+
+* [Design principles](#design-principles)
+* [Architecture](#architecture)
+* [Authoring guidelines](#authoring-guidelines)
+
+**Further documentation**
+
+* [Components](components.md)
+* [Utilities](utilities.md)
+* [Organization](organization.md)
+* [Misc](misc.md)
+
+[Code style](code-style.md)
+
+
+## Design principles
 
 SUIT aims to loosely couple document semantics, presentation, and behaviour so
 as to be able to modify any one of them with minimal impact on the others.
 
-1. Write less CSS by codifying common structural and stylistic patterns in a way
-   that allows them to be reused in different contexts.
+1. **Spent less time writing CSS.**
 
-2. Use HTML as the place where traits are combined. Tend towards applying HTML
-   classes directly to the elements you want to affect.
+   Codifying common structural and stylistic patterns in a way that allows them
+   to be reused in different contexts.
 
-3. Write small, independent, content-agnostic packages with few, known
-   dependencies as opposed to monolithic frameworks, toolkits, or UI parts.
+2. **Combine design traits in HTML templates, using classes**
 
-4. Avoid content-derived HTML class names as these cannot be design- and
-   content-agnostic.
+   Trait composition is shifted to the HTML. In general, look to apply classes
+   directly to the elements you want to affect.
 
+3. **Write small, independent, content-agnostic packages**
 
-## Architecture overview
+   Solve generic problems in isolation and with few, known dependencies. SUIT
+   is philosophically opposed to starting out with a monolithic framework or
+   toolkit.
+
+4. **Use clear, structured, and content-independent HTML class names**
+
+   Avoid content-derived HTML class names as these cannot be design- and
+   content-agnostic. SUIT relies on a fully documented, structured, semantic class
+   name pattern.
+
+These principles are supported by the use of contemporary web site/app
+development tools: templating engines, build tools, and the
+[Bower](http://bower.io/) package manager.
+
+## Architecture
+
+SUIT relies on a specific architectural approach to work around the current
+limits of applying CSS to the DOM (e.g., lack of style encapsulation).
 
 SUIT uses "meaningful hyphens" in HTML class names. At least one hyphen is used
-to separate types and names, but not words. All component names must use "Pascal
-case"; all other names must be "Camel case".
+to separate types and names, but not words.
+
+* All component names must use "Pascal case"; all other names must be "Camel case".
 
 Although the major architectural division is between **utilities** and
 **components**, a layer of finer separation of responsibilities is build upon
@@ -159,77 +194,6 @@ outside of your component's CSS code:
 Your build process should inline the CSS and wrap it any specified Media
 Queries (you should create a production build of your CSS that omits Media
 Queries if you require IE 8 support).
-
-
-## Organization
-
-To faciliate code reuse, ease refactoring, and better separate components:
-
-1. Each new group of utilities should exist in a separate file.
-2. Each independent component should exist in its own file or package.
-3. App-level utility, component, and theming files should be kept separate from
-   app-agnostic utility and component files. This distinction is reified only
-   via 2 top level directories that separate files based on a 'core' and a
-   'theme'.
-
-Files that are particularly important and/or fundamental to the app structure
-can be placed in 'core'. When diffs contain changes to 'core' it should
-accurately reflect the potential for a significant, structural part of the UI
-to be affected. As such, files in 'core' should end up being modified at a
-slower rate than those in 'theme'.
-
-For example:
-
-```
-.
-├── main.css
-├── theme
-|   ├── util
-|   |   ├── link.css
-|   |   └── text.css
-|   └── component
-|       ├── button.css
-|       └── stream-item.css
-└── core
-    ├── util
-    |   ├── dimension.css
-    |   ├── display.css
-    |   ├── layout.css
-    |   └── text.css
-    └── component
-        ├── button.css
-        ├── button-group.css
-        └── grid.css
-```
-
-You'll notice that both 'core' and 'theme' contain 'util' and 'component'
-directories. To change a file from 'theme' to 'core' (and vice versa) requires
-only a change of top-level directory. Therefore, it's easy to move files
-between the 'theme' and 'core' when appropriate. If a component in 'theme' turns
-out to be better suited in 'core', then making the change shouldn't be too difficult.
-
-All 'core' files of a particular type must be referenced before the 'theme' files:
-
-```css
-/* Utilities */
-
-@import "core/util/display.css";
-@import "core/util/layout.css";
-@import "core/util/dimension.css";
-@import "core/util/text.css";
-
-@import "theme/util/link.css";
-@import "theme/util/text.css";
-
-/* Components */
-
-@import "core/component/button.css";
-@import "core/component/button-group.css";
-@import "core/component/grid.css";
-
-@import "theme/component/button.css";
-@import "theme/component/steam-item.css";
-```
 
 
 ## Build tools

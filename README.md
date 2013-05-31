@@ -1,11 +1,13 @@
 # Suit
 
-A collection of small, adaptive, structural CSS modules for building web UIs and custom toolkits.
+A collection of small, adaptive, structural CSS modules for building web UIs
+and custom toolkits.
 
 
 ## Installation
 
-Recommended: install [Bower](http://bower.io/), then run this command in your project directory:
+Recommended: install [Bower](http://bower.io/), then run this command in your
+project directory:
 
 ```
 bower install --save suit
@@ -16,10 +18,10 @@ Alternative: (a download bundle will be available at some point)
 
 ## Official packages
 
-Each package is stand-alone, contains its own documentation and tests, and is written to follow a common set of
-[naming conventions and authoring practices](doc/overview.md). Dependencies are best
-managed using [Bower](http://bower.io/) – a package manager for
-the web.
+Each package is stand-alone, contains its own documentation and tests, and is
+written to follow a common set of [naming conventions and authoring
+practices](doc). Dependencies are best managed using [Bower](http://bower.io/)
+– a package manager for the web.
 
 **Utilities**:
 
@@ -51,14 +53,23 @@ the web.
 **[Read about the design decisions and authoring principles of Suit](doc)**.
 
 * Highly modular; each module is individually versioned.
+
 * Provides common, low-level utility classes.
+
 * Provides common structural UI patterns.
+
 * Responsive grid.
+
 * Consistent class name conventions.
+
 * Work more with HTML than CSS.
+
 * Theme-independence.
+
 * Designed for large web sites and applications.
+
 * Easy to build your application's custom toolkit on top of Suit.
+
 * Very small footprint.
 
 
